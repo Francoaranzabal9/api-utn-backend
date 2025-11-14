@@ -1,102 +1,99 @@
-API Backend UTN
+## API Backend UTN
 
 Este es un proyecto de backend para una API REST desarrollado como parte de un proyecto para la UTN.
  
  Esta API gestiona el inventario de libros para el sistema de bibliotecas 
 
+## Tecnologías Utilizadas
 
-Endpoints de la API (Ejemplo)
+* Este proyecto está construido con las siguientes tecnologías:
 
-Tecnologías Utilizadas
+* Node.js: Entorno de ejecución para JavaScript.
 
-Este proyecto está construido con las siguientes tecnologías:
+* Express.js: Framework para construir la API REST.
 
-Node.js: Entorno de ejecución para JavaScript.
+* MongoDB: Base de datos NoSQL.
 
-Express.js: Framework para construir la API REST.
+* Mongoose: ODM para modelar los datos de MongoDB.
 
-MongoDB: Base de datos NoSQL.
+* Zod: Librería para la validación de esquemas y tipos.
 
-Mongoose: ODM para modelar los datos de MongoDB.
+* JSON Web Tokens (JWT): Para la autenticación y autorización.
 
-Zod: Librería para la validación de esquemas y tipos.
-
-JSON Web Tokens (JWT): Para la autenticación y autorización.
-
-Prerrequisitos
+## Prerrequisitos
 
 Antes de comenzar, asegúrate de tener instalado lo siguiente:
 
-Node.js (se recomienda v18 o superior)
+* Node.js (se recomienda v18 o superior)
 
-npm o yarn
+* npm o yarn
+ 
+* MongoDB (una instancia local o un cluster en la nube como MongoDB Atlas)
 
-MongoDB (una instancia local o un cluster en la nube como MongoDB Atlas)
+## Instalación
 
-Instalación
-
-Clona el repositorio:
-
+1. Clona el repositorio:
+```
 git clone <repository-url>
+```
 
-
-Navega al directorio del proyecto:
-
+2. Navega al directorio del proyecto:
+```
 cd api-backend-utn
+```
 
-
-Instala las dependencias:
-
+3. Instala las dependencias:
+```
 npm install
+```
 
+## Configuración
 
-Configuración
-
-Crea un archivo .env en la raíz del proyecto. Puedes copiar el archivo de ejemplo:
-
+1. Crea un archivo .env en la raíz del proyecto. Puedes copiar el archivo de ejemplo:
+```
 cp .env.example .env
+```
 
-
-Añade las siguientes variables de entorno al archivo .env con tus propios valores:
-
-# Puerto en el que correrá el servidor (ej: 3000)
+2. Añade las siguientes variables de entorno al archivo .env con tus propios valores:
+```
+Puerto en el que correrá el servidor (ej: 3000)
 PORT=3000
 
-# Clave secreta para firmar los tokens JWT (debe ser larga y segura)
+Clave secreta para firmar los tokens JWT (debe ser larga y segura)
 JWT_SECRET=tu_secreto_jwt_aqui
 
-# String de conexión a tu base de datos MongoDB
+ String de conexión a tu base de datos MongoDB
 URI_DB=mongodb://localhost:27017/nombre_de_tu_db
+```
 
-
-Ejecución de la Aplicación
+##Ejecución de la Aplicación
 
 Modo de Desarrollo
 
 Para correr la aplicación en modo de desarrollo con recarga automática (hot-reloading) al detectar cambios:
-
+```
 npm run dev: Inicia el servidor en modo desarrollo.
+```
+El servidor estará corriendo en el puerto especificado en tu archivo `.env` (ej: `http://localhost:3000`).
 
-El servidor estará corriendo en el puerto especificado en tu archivo .env (ej: http://localhost:3000).
-
-Endpoints de la API (Ejemplo)
+## Endpoints de la API (Ejemplo)
 
 A continuación, se documentan los principales endpoints.
 
-Autenticación
+### Autenticación
 
-POST /auth/login: Inicia sesión de un usuario.
+`POST /auth/login:` Inicia sesión de un usuario.
 
-POST /auth/register: Registra un nuevo usuario.
+`POST /auth/register:` Registra un nuevo usuario.
 
-Libros (Ejemplo)
+### Libros 
 
-GET /books: Obtiene una lista de todos los libros.
+`GET /books` Obtiene una lista de todos los libros.
 
-GET /books/:id: Obtiene un libro específico por su ID.
+`GET /books/:id` Obtiene un libro específico por su ID.
 
-POST /books: (Protegido) Crea un nuevo libro.
+`POST /books`  Crea un nuevo libro.
 
-PATCH /books/:id: (Protecido) Actualiza un libro existente.
+`PATCH /books/:id`  Actualiza un libro existente.
 
-DELETE /books/:id: (Protecido) Elimina un libro.
+`DELETE /books/:id`  Elimina un libro.
