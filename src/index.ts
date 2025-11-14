@@ -3,6 +3,9 @@ import cors from "cors"
 import { connectDB } from "./config/mongodb"
 import morgan from "morgan"
 import dotenv from "dotenv"
+import bookRouter from "./routes/booksRoutes"
+import authRoute from "./routes/authRoutes"
+import authMiddleware from "./middleware/authMiddleware"
 
 dotenv.config()
 
@@ -28,6 +31,8 @@ app.get("/", (__, res) => {
   res.json({ status: true })
 })
 
+app.use("/auth", authRoute)
+app.use("/products", authMiddleware, bookRouter)
 
 app.use((__, res) => {
   res.status(404).json({ error: "El recurso no se encuentra" })
