@@ -6,6 +6,8 @@ import dotenv from "dotenv"
 import bookRouter from "./routes/booksRoutes"
 import authRoute from "./routes/authRoutes"
 import authMiddleware from "./middleware/authMiddleware"
+import limiter from "./middleware/rateLimitMiddleware"
+import logger from "./config/logger"
 
 dotenv.config()
 
@@ -26,12 +28,13 @@ app.use(cors())
 app.use(express.json())
 
 app.use(morgan("dev"))
+app.use(logger)
 
 app.get("/", (__, res) => {
   res.json({ status: true })
 })
 
-app.use("/auth", authRoute)
+app.use("/auth", limiter, authRoute)
 app.use("/products", authMiddleware, bookRouter)
 
 app.use((__, res) => {
