@@ -2,10 +2,8 @@ import { Request, Response } from "express"
 import User from "../model/UserModel"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcryptjs"
-import dotenv from "dotenv"
 import { getEnv } from "../config/env"
 
-dotenv.config()
 
 class authController {
   static registerUser = async (req: Request, res: Response): Promise<void | Response> => {

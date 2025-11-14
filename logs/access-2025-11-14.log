@@ -14,3 +14,15 @@
 ::1 GET /books/6917501da3f38bc9df0426ea 404 59 - 42.256 ms
 ::1 PATCH /books/691750528550dac4e181df4d 200 220 - 57.501 ms
 ::1 PATCH /books/691750528550dac4e181df4d 200 220 - 45.694 ms
+::1 POST /auth/register 409 56 - 131.125 ms
+::1 POST /auth/register 200 54 - 169.322 ms
+::1 POST /auth/login 200 198 - 110.248 ms
+::1 POST /books 400 48 - 50.064 ms
+::1 POST /books 201 217 - 92.020 ms
+::1 PATCH /books/691750528550dac4e181df4d 200 220 - 52.402 ms
+::1 PATCH /books/691750528550dac4e181df4d 200 220 - 48.746 ms
+::1 DELETE /books/6917501da3f38bc9df0426ea 404 52 - 43.421 ms
+::1 GET /books/6917501da3f38bc9df0426ea 404 59 - 43.822 ms
+::1 GET /books 200 1313 - 44.670 ms
+::1 PATCH /books/691750528550dac4e181df4d 200 220 - 64.088 ms
+::1 PATCH /books/691750528550dac4e181df4d 200 220 - 51.067 ms

@@ -7,12 +7,6 @@ import { bookSchemaValidator, updateSchemaValidator } from "../validators/booksV
 class bookController {
   static getAllBooks = async (req: Request, res: Response) => {
     try {
-      const header = req.headers.authorization
-
-      if (!header) {
-        return res.status(401).json({ success: false, error: "unauthorized" })
-      }
-
       const bookList = await book.find()
       return res.json({ success: true, data: bookList })
     } catch (e) {
@@ -41,21 +35,15 @@ class bookController {
 
   static addBook = async (req: Request, res: Response) => {
     try {
-      const { title, author } = req.body
-
-      if (!title || !author) {
-        return res.status(400).json({ success: false, message: "Titulo y autor son requeridos" })
-      }
-
-      const existingBook = await book.findOne({ title })
-      if (existingBook) {
-        return res.status(400).json({ success: false, message: "El libro ya existe" })
-      }
-
       const validation = bookSchemaValidator.safeParse(req.body)
 
       if (!validation.success) {
         return res.status(400).json({ success: false, error: validation.error })
+      }
+
+      const existingBook = await book.findOne({ title: validation.data.title })
+      if (existingBook) {
+        return res.status(400).json({ success: false, message: "El libro ya existe" })
       }
 
       const newBook = new book(validation.data)
@@ -76,11 +64,11 @@ class bookController {
 
       const validation = updateSchemaValidator.safeParse(body)
 
-      const updatedBook = await book.findByIdAndUpdate(id, validation.data, { new: true })
-
       if (!validation.success) {
         return res.status(400).json({ success: false, error: validation.error })
       }
+
+      const updatedBook = await book.findByIdAndUpdate(id, validation.data, { new: true })
 
       if (!updatedBook) {
         return res.status(404).json({ success: false, message: "Libro no encontrado" })
@@ -101,12 +89,12 @@ class bookController {
       const deletedBook = await book.findByIdAndDelete(id)
 
       if (!deletedBook) {
-        return res.status(404).json({ success: false, message: "Producto no encontrado" })
+        return res.status(404).json({ success: false, message: "Libro no encontrado" })
       }
 
       return res.json({ success: true, data: deletedBook })
     } catch (e) {
-      return res.status(400).json({ success: false, error: "Error al borrar el producto o el ID es inválido" })
+      return res.status(400).json({ success: false, error: "Error al borrar el libro o el ID es inválido" })
     }
   }
 
