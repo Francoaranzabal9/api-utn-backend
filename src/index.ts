@@ -35,7 +35,7 @@ app.get("/", (__, res) => {
 })
 
 app.use("/auth", limiter, authRoute)
-app.use("/products", authMiddleware, bookRouter)
+app.use("/books", authMiddleware, bookRouter)
 
 app.use((__, res) => {
   res.status(404).json({ error: "El recurso no se encuentra" })
